@@ -1,0 +1,34 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Maven
+/target/
+
+# Gradle
+/build/
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración específicos
+*.class
+*.jar
+*.war
+*.ear
+*.swp
+*.bak
+*.tmp
+
+# VS Code
+.vscode/
+
+# Otros
+*.out
+*.lock

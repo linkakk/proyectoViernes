@@ -5,14 +5,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "estado_tareas")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "estado_tarea") // Simplificado el nombre de la tabla
 public class EstadoTarea {
 
     @Id
@@ -26,7 +25,47 @@ public class EstadoTarea {
     private String descripcion;
 
     @OneToMany(mappedBy = "estadoTarea", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tarea> tareas;
+    @JsonIgnore // Evitar serialización infinita
+    private List<Tarea> tareas = new ArrayList<>();
 
+    public EstadoTarea(Long id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
+    public EstadoTarea() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
+    }
 }

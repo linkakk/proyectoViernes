@@ -26,12 +26,12 @@ public class Tarea {
     @Column(name = "fecha_finalizacion", nullable = false)
     private LocalDate fechaFinalizacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_estado_tarea", nullable = false)
     private EstadoTarea estadoTarea;
 
     @Column(name = "is_finalizada", nullable = false)
-    private boolean isFinalizada = false;
+    private Boolean isFinalizada = false;
 
     // Getters y Setters
 
@@ -88,11 +88,11 @@ public class Tarea {
         this.estadoTarea = estadoTarea;
     }
 
-    public boolean isFinalizada() {
+    public Boolean isFinalizada() {
         return isFinalizada;
     }
 
-    public void setFinalizada(boolean finalizada) {
+    public void setFinalizada(Boolean finalizada) {
         isFinalizada = finalizada;
     }
 }

@@ -91,4 +91,12 @@ public class TareaController {
         );
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TareaDTO> actualizarTarea(@PathVariable   Long id, @Valid @RequestBody TareaDTO tareaDTO){
+        Tarea tareaActualizada = tareaService.actualizarTarea(id, tareaDTO);
+
+        TareaDTO respuestaDTO = tareaService.convertirADTO(tareaActualizada);
+        return ResponseEntity.ok(respuestaDTO);
+    }
+
 }

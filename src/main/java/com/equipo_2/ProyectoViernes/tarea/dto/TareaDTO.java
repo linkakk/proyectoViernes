@@ -24,7 +24,7 @@ public class TareaDTO {
 
     private Long estadoTareaId;
     private String estadoTareaNombre;
-    private boolean isFinalizada;
+    private Boolean isFinalizada;
 
     /**
      * Constructor completo.
@@ -49,11 +49,11 @@ public class TareaDTO {
 
     // Getters y Setters
 
-    public boolean isFinalizada() {
+    public Boolean isFinalizada() {
         return isFinalizada;
     }
 
-    public void setFinalizada(boolean finalizada) {
+    public void setFinalizada(Boolean finalizada) {
         isFinalizada = finalizada;
     }
 

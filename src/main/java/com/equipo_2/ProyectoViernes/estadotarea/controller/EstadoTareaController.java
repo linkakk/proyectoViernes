@@ -2,6 +2,9 @@ package com.equipo_2.ProyectoViernes.estadotarea.controller;
 
 import com.equipo_2.ProyectoViernes.estadotarea.dto.EstadoTareaDTO;
 import com.equipo_2.ProyectoViernes.estadotarea.service.EstadoTareaService;
+import com.equipo_2.ProyectoViernes.tarea.dto.TareaDTO;
+import com.equipo_2.ProyectoViernes.tarea.model.Tarea;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,4 +48,5 @@ public class EstadoTareaController {
         estadoTareaService.eliminarEstadoTarea(id);
         return ResponseEntity.ok("Estado de tarea con ID: " + id + " eliminado correctamente");
     }
+
 }

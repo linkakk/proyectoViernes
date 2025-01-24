@@ -51,6 +51,28 @@ public class TareaService {
                 .orElseThrow(() -> new TareaaNotFoundException("Tarea con ID: " + id + " no encontrada"));
     }
 
+    // Actualizar una tarea existente
+    public Tarea actualizarTarea(Long id, TareaDTO tareaDTO) {
+        // Buscar la tarea existente
+        Tarea tareaExistente = tareaRepository.findById(id)
+                .orElseThrow(() -> new TareaaNotFoundException("Tarea con ID: " + id + " no encontrada"));
+
+        // Actualizar los datos de la tarea existente con los valores del DTO
+        tareaExistente.setNombre(tareaDTO.getNombre());
+        tareaExistente.setDescripcion(tareaDTO.getDescripcion());
+        tareaExistente.setFechaFinalizacion(tareaDTO.getFechaFinalizacion());
+
+        // Actualizar el estado de la tarea (si existe)
+        if (tareaDTO.getEstadoTareaId() != null) {
+            EstadoTarea estadoTarea = new EstadoTarea();
+            estadoTarea.setId(tareaDTO.getEstadoTareaId());
+            tareaExistente.setEstadoTarea(estadoTarea);
+        }
+
+        // Guardar la tarea actualizada
+        return tareaRepository.save(tareaExistente);
+    }
+
     // Conversión de DTO a entidad
     public Tarea convertirAEntidad(TareaDTO dto) {
         Tarea tarea = new Tarea();
@@ -58,9 +80,8 @@ public class TareaService {
         tarea.setNombre(dto.getNombre());
         tarea.setDescripcion(dto.getDescripcion());
         tarea.setFechaFinalizacion(dto.getFechaFinalizacion());
-        tarea.isFinalizada();
 
-        // Asignar el EstadoTarea basado en el ID del DTO
+        // Verificar y asignar EstadoTarea
         if (dto.getEstadoTareaId() != null) {
             EstadoTarea estadoTarea = new EstadoTarea();
             estadoTarea.setId(dto.getEstadoTareaId());

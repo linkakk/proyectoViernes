@@ -86,4 +86,20 @@ public class EstadoTareaService {
     public EstadoTareaDTO convertirADTO(EstadoTarea entidad) {
         return new EstadoTareaDTO(entidad.getId(), entidad.getNombre(), entidad.getDescripcion());
     }
+    public EstadoTareaDTO actualizarEstadoTarea(Long id, EstadoTareaDTO estadoTareaDTO) {
+        // Buscar el estado de tarea existente
+        EstadoTarea estadoTareaExistente = estadoTareaRepository.findById(id)
+                .orElseThrow(() -> new EstadoTareaNotFoundException("Estado de tarea con ID: " + id + " no encontrado"));
+
+        // Actualizar los campos necesarios
+        estadoTareaExistente.setNombre(estadoTareaDTO.getNombre());
+        estadoTareaExistente.setDescripcion(estadoTareaDTO.getDescripcion());
+
+        // Guardar los cambios en la base de datos
+        EstadoTarea actualizado = estadoTareaRepository.save(estadoTareaExistente);
+
+        // Convertir a DTO y devolver
+        return convertirADTO(actualizado);
+    }
+
 }

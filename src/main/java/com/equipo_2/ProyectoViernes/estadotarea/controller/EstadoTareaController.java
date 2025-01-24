@@ -48,5 +48,12 @@ public class EstadoTareaController {
         estadoTareaService.eliminarEstadoTarea(id);
         return ResponseEntity.ok("Estado de tarea con ID: " + id + " eliminado correctamente");
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<EstadoTareaDTO> actualizarEstadoTarea(
+            @PathVariable Long id,
+            @Valid @RequestBody EstadoTareaDTO estadoTareaDTO) {
+        EstadoTareaDTO actualizado = estadoTareaService.actualizarEstadoTarea(id, estadoTareaDTO);
+        return ResponseEntity.ok(actualizado);
+    }
 
 }
